@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.CustomOtherViewActivity">
+
+    <com.zrq.advancedlight.view.TitleBar
+        android:id="@+id/title_bar"
+        app:backgroundColor="@color/light_pink"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <com.zrq.advancedlight.view.InvalidTextView
+        android:layout_marginTop="20dp"
+        android:text="@string/test"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:lineColor="@color/red"
+        android:background="@color/light_pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.zrq.advancedlight.view.RectView
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        app:rectColor="@color/light_pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

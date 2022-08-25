@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.3648148148148148" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/drawable/picture_check.xml" value="0.26979166666666665" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_animator.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_calendar.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_card_view.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_contact.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_custom_other_view.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_custom_view.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_horizontal_view.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_http.xml" value="0.33958333333333335" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_image.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_media.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_my_recycler_view.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_note_content.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_notification.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_ok_http.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_pic_load.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_picture.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_post.xml" value="0.33541666666666664" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_post_text.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_request_test.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_sms.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_up_load_file.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/activity_web.xml" value="0.17280524722502522" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/content_http.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/custom_title_bar.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/dialog_duration.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/fragment_list.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/fragment_second.xml" value="0.19270833333333334" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_contact.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_fragment_list.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_get_text.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_picture.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_recycler.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_sms.xml" value="0.25625" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/item_user.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/mytoolbar.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/navigation_header.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/notification_fold.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/layout/show_picture.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/menu/drawer_view.xml" value="0.3567708333333333" />
+        <entry key="..\:/AndroidStudioProjects/AdvancedLight/app/src/main/res/menu/home_view.xml" value="0.3567708333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

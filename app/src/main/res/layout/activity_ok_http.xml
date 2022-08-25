@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="50dp"
+    android:paddingVertical="10dp"
+    tools:context=".activity.OkHttpActivity">
+
+    <Button
+        android:id="@+id/btn_ok_http_get"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OkHttp-Get"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_ok_http_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OkHttp-Post"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_ok_http_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OkHttp-Upload"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_ok_http_up_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OkHttp-Upload-More"
+        android:textAllCaps="false" />
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RectView">
+        <attr name="rectColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="InvalidTextView">
+        <attr name="lineColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="TitleBar">
+        <attr name="titleColor" format="color" />
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+</resources>
