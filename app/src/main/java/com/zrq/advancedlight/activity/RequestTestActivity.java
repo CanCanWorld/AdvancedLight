@@ -30,7 +30,8 @@ import java.util.Set;
 public class RequestTestActivity extends AppCompatActivity {
 
     private static final String TAG = "PostTextActivity";
-    private static final String BASE_URL = "http://192.168.1.3:9102";
+    //    private static final String BASE_URL = "http://192.168.1.3:9102";
+    private static final String BASE_URL = "http://api.tianapi.com/dongman/index";
 
     private Context mContext;
     private Button mBtnPost;
@@ -60,7 +61,8 @@ public class RequestTestActivity extends AppCompatActivity {
         mBtnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postRequest(BASE_URL + "/post/comment");
+//                postRequest(BASE_URL + "/post/comment");
+                test();
             }
         });
         mBtnGetParams.setOnClickListener(new View.OnClickListener() {
@@ -149,14 +151,96 @@ public class RequestTestActivity extends AppCompatActivity {
     }
 
 
+    private void test() {
+        new Thread(() -> {
+            StringBuilder sb = new StringBuilder();
+            InputStream inputStream = null;
+            Map<String, String> params = new HashMap<>();
+            params.put("key", "ff239574c8553cb91b015bad49c2a115");
+            params.put("num", "10");
+            try {
+                if (params != null && params.size() > 0) {
+                    sb.append("?");
+
+                    Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<String, String> next = iterator.next();
+                        sb.append(next.getKey());
+                        sb.append("=");
+                        sb.append(next.getValue());
+                        if (iterator.hasNext()) {
+                            sb.append("&");
+                        }
+                    }
+                }
+                String param = sb.toString();
+                Log.d(TAG, "param: " + param);
+                URL url;
+                url = new URL(BASE_URL + param);
+                Log.d(TAG, "url: " + url);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setConnectTimeout(10000);
+                connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                connection.setRequestProperty("Accept-Language", " zh-CN,zh;q=0.9");
+                connection.connect();
+                if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    inputStream = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    String readLine = reader.readLine();
+                    Log.d(TAG, "readLine: " + readLine);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mTvGetParams.setText(readLine);
+                        }
+                    });
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }).start();
+    }
+
     private void postRequest(String s) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 OutputStream outputStream = null;
                 InputStream inputStream = null;
+
+                Map<String, String> params = new HashMap<>();
+                params.put("key", "ff239574c8553cb91b015bad49c2a115");
+                params.put("num", "10");
+
+                StringBuilder sb = new StringBuilder();
+                if (params != null && params.size() > 0) {
+                    sb.append("?");
+
+                    Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Map.Entry<String, String> next = iterator.next();
+                        sb.append(next.getKey());
+                        sb.append("=");
+                        sb.append(next.getValue());
+                        if (iterator.hasNext()) {
+                            sb.append("&");
+                        }
+                    }
+                }
+                String param = sb.toString();
                 try {
-                    URL url = new URL(s);
+                    URL url = new URL(s + param);
                     //创建连接
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     //connection参数的配置
@@ -168,6 +252,9 @@ public class RequestTestActivity extends AppCompatActivity {
                     //创建gson将实体对象转成json数据
                     Gson gson = new Gson();
                     String jsonStr = gson.toJson(commentItem);
+
+                    Log.d(TAG, "param: " + param);
+                    Log.d(TAG, "jsonStr: " + jsonStr);
                     //json转成byte[]字节数组
                     byte[] bytes = jsonStr.getBytes(StandardCharsets.UTF_8);
                     //设置连接的内容长度
@@ -215,6 +302,8 @@ public class RequestTestActivity extends AppCompatActivity {
                 }
             }
         }
-        ).start();
+        ).
+
+                start();
     }
 }

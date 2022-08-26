@@ -20,7 +20,7 @@
         android:theme="@style/Theme.AdvancedLight"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PostActivity"
+            android:name=".activity.PostActivity"
             android:exported="false" />
         <activity
             android:name=".activity.OkHttpActivity"
