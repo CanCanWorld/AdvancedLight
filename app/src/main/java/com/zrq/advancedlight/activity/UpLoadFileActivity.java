@@ -1,6 +1,7 @@
 package com.zrq.advancedlight.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -47,6 +48,7 @@ public class UpLoadFileActivity extends AppCompatActivity {
     private Button mBtnOkGet;
     private static final int PERMISSION_CODE = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ public class UpLoadFileActivity extends AppCompatActivity {
         initData();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkPermission() {
         int result = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
         if (result != PackageManager.PERMISSION_GRANTED) {

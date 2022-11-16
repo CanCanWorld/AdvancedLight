@@ -30,7 +30,6 @@ public class UserDaoImpl implements IUserDao {
         return result;
     }
 
-
     @Override
     public int deleteUserById(int id) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -43,7 +42,7 @@ public class UserDaoImpl implements IUserDao {
     public int updateUserById(User user) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = userToValues(user);
-        int result = db.update(Constants.TABLE_NAME, values, Constants.FIELD_ID, new String[]{String.valueOf(user.getId())});
+        int result = db.update(Constants.TABLE_NAME, values, Constants.FIELD_ID + "=?", new String[]{String.valueOf(user.getId())});
         db.close();
         return result;
     }
