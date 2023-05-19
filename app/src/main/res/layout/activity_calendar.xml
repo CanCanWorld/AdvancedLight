@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.CalendarActivity">
+    tools:context=".activity.advanced.CalendarActivity">
 
     <Button
         android:id="@+id/btn_get_calendar"

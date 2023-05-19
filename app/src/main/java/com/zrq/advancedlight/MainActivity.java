@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mList = new ArrayList<>();
         mFragments = new ArrayList<>();
         mList.add("安卓进阶之光");
-        mList.add("暂无");
+        mList.add("Kotlin");
         mList.add("暂无");
         mList.add("暂无");
         mList.add("暂无");

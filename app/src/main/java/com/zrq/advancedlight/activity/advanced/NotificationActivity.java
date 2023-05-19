@@ -1,4 +1,4 @@
-package com.zrq.advancedlight.activity;
+package com.zrq.advancedlight.activity.advanced;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;

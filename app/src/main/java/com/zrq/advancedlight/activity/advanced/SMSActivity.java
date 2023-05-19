@@ -1,4 +1,4 @@
-package com.zrq.advancedlight.activity;
+package com.zrq.advancedlight.activity.advanced;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

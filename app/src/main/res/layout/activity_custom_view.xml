@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CustomViewActivity">
+    tools:context=".activity.advanced.CustomViewActivity">
 
     <com.zrq.advancedlight.view.CustomView
         android:background="@mipmap/bg5"

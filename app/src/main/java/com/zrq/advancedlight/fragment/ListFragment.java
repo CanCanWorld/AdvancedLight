@@ -10,31 +10,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.zrq.advancedlight.R;
-import com.zrq.advancedlight.activity.AnimatorActivity;
-import com.zrq.advancedlight.activity.CalendarActivity;
-import com.zrq.advancedlight.activity.CardViewActivity;
-import com.zrq.advancedlight.activity.ContactActivity;
-import com.zrq.advancedlight.activity.CustomOtherViewActivity;
-import com.zrq.advancedlight.activity.CustomViewActivity;
-import com.zrq.advancedlight.activity.HorizontalViewActivity;
-import com.zrq.advancedlight.activity.HttpActivity;
-import com.zrq.advancedlight.activity.ImageActivity;
-import com.zrq.advancedlight.activity.LoginActivity;
-import com.zrq.advancedlight.activity.MediaActivity;
-import com.zrq.advancedlight.activity.MyRecyclerViewActivity;
-import com.zrq.advancedlight.activity.NoteContentActivity;
-import com.zrq.advancedlight.activity.NotificationActivity;
-import com.zrq.advancedlight.activity.OkHttpActivity;
-import com.zrq.advancedlight.activity.PicLoadActivity;
-import com.zrq.advancedlight.activity.PostActivity;
-import com.zrq.advancedlight.activity.RequestTestActivity;
-import com.zrq.advancedlight.activity.SMSActivity;
-import com.zrq.advancedlight.activity.UpLoadFileActivity;
-import com.zrq.advancedlight.activity.WebActivity;
+import com.zrq.advancedlight.activity.advanced.AnimatorActivity;
+import com.zrq.advancedlight.activity.advanced.CalendarActivity;
+import com.zrq.advancedlight.activity.advanced.CardViewActivity;
+import com.zrq.advancedlight.activity.advanced.ContactActivity;
+import com.zrq.advancedlight.activity.advanced.CustomOtherViewActivity;
+import com.zrq.advancedlight.activity.advanced.CustomViewActivity;
+import com.zrq.advancedlight.activity.advanced.HorizontalViewActivity;
+import com.zrq.advancedlight.activity.advanced.HttpActivity;
+import com.zrq.advancedlight.activity.advanced.ImageActivity;
+import com.zrq.advancedlight.activity.advanced.LoginActivity;
+import com.zrq.advancedlight.activity.advanced.MediaActivity;
+import com.zrq.advancedlight.activity.advanced.MyRecyclerViewActivity;
+import com.zrq.advancedlight.activity.advanced.NoteContentActivity;
+import com.zrq.advancedlight.activity.advanced.NotificationActivity;
+import com.zrq.advancedlight.activity.advanced.OkHttpActivity;
+import com.zrq.advancedlight.activity.advanced.PicLoadActivity;
+import com.zrq.advancedlight.activity.advanced.PostActivity;
+import com.zrq.advancedlight.activity.advanced.RequestTestActivity;
+import com.zrq.advancedlight.activity.advanced.SMSActivity;
+import com.zrq.advancedlight.activity.advanced.UpLoadFileActivity;
+import com.zrq.advancedlight.activity.advanced.WebActivity;
+import com.zrq.advancedlight.activity.kotlin.CameraActivity;
 import com.zrq.advancedlight.adapter.ItemAdapter;
 import com.zrq.advancedlight.adapter.MyAdapter;
 
@@ -96,7 +96,9 @@ public class ListFragment extends Fragment {
             mList.add("WebView");
             mList.add("OkHttp");
             mList.add("Post");
-        } else if ("暂无".equals(title)) {
+        } else if ("Kotlin".equals(title)) {
+            mList.add("camera");
+        }else if ("暂无".equals(title)) {
             mList.add("暂无");
             mList.add("暂无");
             mList.add("暂无");
@@ -184,7 +186,15 @@ public class ListFragment extends Fragment {
                             break;
                     }
                     startActivity(intent);
-                } else if ("暂无".equals(title)) {
+                } else if ("Kotlin".equals(title)) {
+                    Intent intent = null;
+                    switch (position) {
+                        case 0:
+                            intent = new Intent(getContext(), CameraActivity.class);
+                            break;
+                    }
+                    startActivity(intent);
+                }else if ("暂无".equals(title)) {
                     Toast.makeText(getContext(), "暂无", Toast.LENGTH_SHORT).show();
                 }
 

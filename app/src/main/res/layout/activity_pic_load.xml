@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".activity.PicLoadActivity">
+    tools:context=".activity.advanced.PicLoadActivity">
 
     <EditText
         android:id="@+id/et_scale"
