@@ -2,18 +2,22 @@ package com.zrq.advancedlight.activity.kotlin
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.media.MediaMetadataRetriever
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.zrq.advancedlight.adapter.PicAdapter
 import com.zrq.advancedlight.databinding.ActivityCameraBinding
+import com.zrq.advancedlight.entity.Media
+import com.zrq.advancedlight.entity.MediaType
+import com.zrq.advancedlight.view.CameraBottomDialog
+import com.zrq.advancedlight.view.PictureDialog
+import com.zrq.advancedlight.view.VideoDialog
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -36,42 +40,77 @@ class CameraActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), 110)
         }
-        mAdapter = PicAdapter(this)
+        mAdapter = PicAdapter(this, list,
+            //onDelete
+            { position ->
+                File(list[position].path).delete()
+                list.removeAt(position)
+                mAdapter.notifyDataSetChanged()
+            },
+            //onAdd
+            {
+                val bottomDialog = CameraBottomDialog(this, this, {
+                    addImage()
+                }, {
+                    addVideo()
+                })
+
+                bottomDialog.behavior.apply {
+                    state = BottomSheetBehavior.STATE_EXPANDED
+                }
+                bottomDialog.show()
+            },
+            //onItemClick
+            { position ->
+                val media = list[position]
+                when (media.type) {
+                    MediaType.Photo -> {
+                        val dialog = PictureDialog(this, this, media.path)
+                        dialog.show()
+                    }
+                    MediaType.Video -> {
+                        val dialog = VideoDialog(this, this, media.path)
+                        dialog.show()
+                    }
+                }
+            })
         mBinding.recyclerView.adapter = mAdapter
+    }
+
+    private fun addImage() {
+        val intent = Intent()
+        intent.action = ACTION_IMAGE_CAPTURE
+        intent.apply {
+            createImageFile()?.let { file ->
+                imagePath = file.absolutePath
+                Log.d(TAG, "filePath: ${file.absolutePath}")
+                val imageUri = FileProvider.getUriForFile(this@CameraActivity, FILE_PROVIDER_AUTHORITY, file)
+                putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+            }
+        }
+        startActivityForResult(intent, REQUEST_CODE_IMAGE)
+    }
+
+    private fun addVideo() {
+        val intent = Intent()
+        intent.action = MediaStore.ACTION_VIDEO_CAPTURE
+        intent.apply {
+            createVideoFile()?.let { file ->
+                videoPath = file.absolutePath
+                Log.d(TAG, "videoPath: $videoPath")
+                val videoUri = FileProvider.getUriForFile(this@CameraActivity, FILE_PROVIDER_AUTHORITY, file)
+                putExtra(MediaStore.EXTRA_OUTPUT, videoUri)
+            }
+        }
+        startActivityForResult(intent, REQUEST_CODE_VIDEO)
     }
 
     private var videoPath: String? = null
     private var imagePath: String? = null
     private lateinit var mAdapter: PicAdapter
+    private val list = mutableListOf<Media>()
 
     private fun initEvent() {
-
-        mBinding.btnImage.setOnClickListener {
-            val intent = Intent()
-            intent.action = ACTION_IMAGE_CAPTURE
-            intent.apply {
-                createImageFile()?.let { file ->
-                    imagePath = file.absolutePath
-                    Log.d(TAG, "filePath: ${file.absolutePath}")
-                    val imageUri = FileProvider.getUriForFile(this@CameraActivity, FILE_PROVIDER_AUTHORITY, file)
-                    putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                }
-            }
-            startActivityForResult(intent, REQUEST_CODE_IMAGE)
-        }
-        mBinding.btnVideo.setOnClickListener {
-            val intent = Intent()
-            intent.action = MediaStore.ACTION_VIDEO_CAPTURE
-            intent.apply {
-                createVideoFile()?.let { file ->
-                    videoPath = file.absolutePath
-                    Log.d(TAG, "videoPath: $videoPath")
-                    val videoUri = FileProvider.getUriForFile(this@CameraActivity, FILE_PROVIDER_AUTHORITY, file)
-                    putExtra(MediaStore.EXTRA_OUTPUT, videoUri)
-                }
-            }
-            startActivityForResult(intent, REQUEST_CODE_VIDEO)
-        }
     }
 
     private fun createImageFile(): File? {
@@ -101,16 +140,22 @@ class CameraActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
+            //TODO:没有拍照或者录视频将不去创建
             when (requestCode) {
                 REQUEST_CODE_IMAGE -> {
-                    val bitmap = BitmapFactory.decodeFile(imagePath)
-                    mBinding.ivImage.setImageBitmap(bitmap)
+                    imagePath?.let {
+                        list.add(Media(it, MediaType.Photo))
+                    }
+                    mAdapter.notifyDataSetChanged()
+                    mBinding.recyclerView.scrollToPosition(list.size)
                 }
 
                 REQUEST_CODE_VIDEO -> {
-                    val media = MediaMetadataRetriever()
-                    media.setDataSource(videoPath)
-                    mBinding.ivVideo.setImageBitmap(media.frameAtTime)
+                    videoPath?.let {
+                        list.add(Media(it, MediaType.Video))
+                    }
+                    mAdapter.notifyDataSetChanged()
+                    mBinding.recyclerView.scrollToPosition(list.size)
                 }
 
                 else -> {}
@@ -120,8 +165,8 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        imagePath?.let {
-            File(it).delete()
+        list.forEach {
+            File(it.path).delete()
         }
         videoPath?.let {
             File(it).delete()

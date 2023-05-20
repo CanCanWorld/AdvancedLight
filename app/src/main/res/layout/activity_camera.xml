@@ -7,38 +7,11 @@
     android:orientation="vertical"
     tools:context=".activity.kotlin.CameraActivity">
 
-    <Button
-        android:id="@+id/btnImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="拍照" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/grey"
-        android:scaleType="centerCrop" />
-
-
-    <Button
-        android:id="@+id/btnVideo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="录像" />
-
-    <ImageView
-        android:id="@+id/ivVideo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@color/grey"
-        android:scaleType="centerCrop" />
 
 </LinearLayout>
