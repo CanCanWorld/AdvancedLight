@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.zrq.advancedlight"
-        minSdk 22
-        targetSdk 33
+        minSdk 24
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -65,4 +65,6 @@ dependencies {
     implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.7'
     // 可选，使用exoplayer进行解码
     implementation 'xyz.doikki.android.dkplayer:player-exo:3.3.7'
+
+    implementation 'com.arthenica:ffmpeg-kit-full:5.1'
 }

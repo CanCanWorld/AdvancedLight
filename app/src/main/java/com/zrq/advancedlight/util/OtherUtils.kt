@@ -3,13 +3,10 @@ package com.zrq.advancedlight.util
 import android.app.Activity
 import android.graphics.*
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.annotation.ColorInt
-import com.zrq.advancedlight.entity.Media
-import com.zrq.advancedlight.entity.MediaType
 import java.io.File
 import java.io.FileOutputStream
-import java.text.SimpleDateFormat
-import java.util.*
 
 object OtherUtils {
 
@@ -29,7 +26,7 @@ object OtherUtils {
         return dm.heightPixels
     }
 
-    fun addWaterMaskByPath(path:String , text: String , @ColorInt color: Int){
+    fun addWaterMaskByPath(path: String, text: String, @ColorInt color: Int) {
         var bitmap = BitmapFactory.decodeFile(path)
         bitmap = addWaterMask(bitmap, text, color)
         val file = File(path)
@@ -37,7 +34,7 @@ object OtherUtils {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ops)
     }
 
-    fun addWaterMask(bitmap: Bitmap, text: String, @ColorInt color: Int): Bitmap {
+    private fun addWaterMask(bitmap: Bitmap, text: String, @ColorInt color: Int): Bitmap {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.apply {
             setColor(color)
@@ -59,4 +56,24 @@ object OtherUtils {
         canvas.drawText(text, x, y, paint)
         return newBitmap
     }
+
+    fun createImageByText(path: String, text: String, @ColorInt color: Int) {
+        try {
+            val bounds = Rect()
+            val paint = Paint()
+            paint.color = color
+            paint.textSize = 60f
+            val padding = 10
+            paint.getTextBounds(text, 0, text.length, bounds)
+            val bitmap = Bitmap.createBitmap(bounds.width() + padding, bounds.height() + padding, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            canvas.drawText(text, 0f + padding / 2, bounds.height().toFloat() + padding / 2, paint)
+            val out = FileOutputStream(path)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, out)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
 }
