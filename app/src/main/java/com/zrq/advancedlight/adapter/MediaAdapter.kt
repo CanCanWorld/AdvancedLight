@@ -20,13 +20,13 @@ import com.zrq.advancedlight.entity.MediaType
  * @author zhangruiqian
  * @date 2023/5/18 18:07
  */
-class PicAdapter(
+class MediaAdapter(
     private val context: Context,
     private val list: MutableList<Media> = mutableListOf(),
     private val onDelete: (Int) -> Unit,
     private val onAdd: () -> Unit,
     private val onItemClick: (Int) -> Unit
-) : RecyclerView.Adapter<PicAdapter.InnerViewHolder>() {
+) : RecyclerView.Adapter<MediaAdapter.InnerViewHolder>() {
     inner class InnerViewHolder(val rootView: View) : ViewHolder(rootView) {
     }
 

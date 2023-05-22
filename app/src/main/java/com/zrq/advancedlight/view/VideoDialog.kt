@@ -57,6 +57,7 @@ class VideoDialog(
         val titleView = TitleView(context)
         titleView.setTitle("视频")
         controller.addControlComponent(completeView, errorView, prepareView, titleView)
+        controller.addControlComponent(MyVodControlView(context))
         controller.addControlComponent(GestureView(context))
         controller.setCanChangePosition(true)
 

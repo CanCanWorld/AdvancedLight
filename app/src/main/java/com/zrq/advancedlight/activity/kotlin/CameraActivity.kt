@@ -1,7 +1,9 @@
 package com.zrq.advancedlight.activity.kotlin
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -11,10 +13,13 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.zrq.advancedlight.adapter.PicAdapter
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
+import com.zrq.advancedlight.adapter.MediaAdapter
 import com.zrq.advancedlight.databinding.ActivityCameraBinding
 import com.zrq.advancedlight.entity.Media
 import com.zrq.advancedlight.entity.MediaType
+import com.zrq.advancedlight.util.OtherUtils
 import com.zrq.advancedlight.view.CameraBottomDialog
 import com.zrq.advancedlight.view.PictureDialog
 import com.zrq.advancedlight.view.VideoDialog
@@ -26,7 +31,11 @@ import java.util.Locale
 
 class CameraActivity : AppCompatActivity() {
 
-    lateinit var mBinding: ActivityCameraBinding
+    private lateinit var mBinding: ActivityCameraBinding
+    private var videoPath: String? = null
+    private var imagePath: String? = null
+    private lateinit var mAdapter: MediaAdapter
+    private val list = mutableListOf<Media>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,16 +45,30 @@ class CameraActivity : AppCompatActivity() {
         initEvent()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initData() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), 110)
         }
-        mAdapter = PicAdapter(this, list,
+        mAdapter = MediaAdapter(this, list,
             //onDelete
             { position ->
-                File(list[position].path).delete()
-                list.removeAt(position)
+                val removeAt = list.removeAt(position)
                 mAdapter.notifyDataSetChanged()
+                Snackbar.make(window.decorView, "删除成功", Snackbar.LENGTH_LONG)
+                    .setAction("撤回") {
+                        list.add(position, removeAt)
+                        mAdapter.notifyDataSetChanged()
+                    }
+                    .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                            super.onDismissed(transientBottomBar, event)
+                            if (event != Snackbar.Callback.DISMISS_EVENT_ACTION) {
+                                File(removeAt.path).delete()
+                            }
+                        }
+                    })
+                    .show()
             },
             //onAdd
             {
@@ -105,16 +128,11 @@ class CameraActivity : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_CODE_VIDEO)
     }
 
-    private var videoPath: String? = null
-    private var imagePath: String? = null
-    private lateinit var mAdapter: PicAdapter
-    private val list = mutableListOf<Media>()
-
     private fun initEvent() {
     }
 
     private fun createImageFile(): File? {
-        val format = SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(Date().time)
+        val format = SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(Date())
         val fileName = "PIC_$format"
         val file = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return try {
@@ -126,7 +144,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun createVideoFile(): File? {
-        val format = SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(Date().time)
+        val format = SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(Date())
         val fileName = "VIDEO_$format"
         val file = getExternalFilesDir(Environment.DIRECTORY_MOVIES)
         return try {
@@ -137,28 +155,56 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            //TODO:没有拍照或者录视频将不去创建
-            when (requestCode) {
-                REQUEST_CODE_IMAGE -> {
-                    imagePath?.let {
-                        list.add(Media(it, MediaType.Photo))
+        when (resultCode) {
+            RESULT_OK -> {
+                when (requestCode) {
+                    REQUEST_CODE_IMAGE -> {
+                        imagePath?.let {
+                            Log.d(TAG, "onActivityResult: $it")
+                            val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(Date())
+                            OtherUtils.addWaterMaskByPath(it, time, Color.RED)
+                            list.add(Media(it, MediaType.Photo))
+                            mAdapter.notifyDataSetChanged()
+                            mBinding.recyclerView.scrollToPosition(list.size)
+                        }
                     }
-                    mAdapter.notifyDataSetChanged()
-                    mBinding.recyclerView.scrollToPosition(list.size)
-                }
 
-                REQUEST_CODE_VIDEO -> {
-                    videoPath?.let {
-                        list.add(Media(it, MediaType.Video))
+                    REQUEST_CODE_VIDEO -> {
+                        videoPath?.let {
+                            val waterPath = "/storage/emulated/0/Android/data/com.zrq.advancedlight/files/Pictures/water.png"
+                            val strCommand = "ffmpeg -y -i $it -i $waterPath -filter_complex [0:v]scale=iw:ih[outv0];[1:0]scale=0.0:0.0[outv1];[outv0][outv1]overlay=20:20 -preset superfast $it"
+                            val commands: Array<String> = strCommand.split(" ".toRegex()).toTypedArray()
+                            //开始执行FFmpeg命令
+
+                            list.add(Media(it, MediaType.Video))
+                            mAdapter.notifyDataSetChanged()
+                            mBinding.recyclerView.scrollToPosition(list.size)
+                        }
                     }
-                    mAdapter.notifyDataSetChanged()
-                    mBinding.recyclerView.scrollToPosition(list.size)
-                }
 
-                else -> {}
+                    else -> {}
+                }
+            }
+            RESULT_CANCELED -> {
+                //没有拍照或者录视频将不去创建
+                when (requestCode) {
+                    REQUEST_CODE_IMAGE -> {
+                        imagePath?.let {
+                            File(it).delete()
+                        }
+                    }
+
+                    REQUEST_CODE_VIDEO -> {
+                        videoPath?.let {
+                            File(it).delete()
+                        }
+                    }
+
+                    else -> {}
+                }
             }
         }
     }

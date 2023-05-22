@@ -36,14 +36,6 @@
         android:theme="@style/Theme.AdvancedLight"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.kotlin.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.kotlin.ComposeActivity"
-            android:exported="false"
-            android:label="@string/title_activity_compose"
-            android:theme="@style/Theme.AdvancedLight" />
-        <activity
             android:name=".activity.kotlin.CameraActivity"
             android:exported="false" />
 
