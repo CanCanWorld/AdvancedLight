@@ -50,9 +50,30 @@
         <entry key="..\:/Users/smq/android/AdvancedLight/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/smq/android/AdvancedLight/app/src/main/res/layout/navigation_header.xml" value="0.26902173913043476" />
         <entry key="..\:/Users/smq/android/AdvancedLight/app/src/main/res/menu/drawer_view.xml" value="0.4515625" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/baseline_add_24.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/baseline_camera_alt_24.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/baseline_clear_24.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/baseline_play_circle_outline_24.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/baseline_videocam_24.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/pressed_background_grey.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/select_btn_left.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/select_btn_right.xml" value="0.19" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_bottom_circle.xml" value="0.2455" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_btn_left.xml" value="0.19" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_btn_left_select.xml" value="0.19" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_btn_left_unselect.xml" value="0.19" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_btn_right_select.xml" value="0.19" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_btn_right_unselect.xml" value="0.19" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_et_bg.xml" value="0.19" />
         <entry key="..\:/project/android/AdvancedLight/app/src/main/res/drawable/shape_loading.xml" value="0.216" />
-        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/activity_camera.xml" value="0.20471014492753623" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/activity_camera.xml" value="0.375" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/activity_custom_other_view.xml" value="0.24895833333333334" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/dialog_bottom_camera.xml" value="0.3625" />
         <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/dialog_loading.xml" value="0.625" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/dialog_picture.xml" value="0.3625" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/item_add.xml" value="0.3625" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/item_media.xml" value="0.20153985507246377" />
+        <entry key="..\:/project/android/AdvancedLight/app/src/main/res/layout/item_picture.xml" value="0.3625" />
       </map>
     </option>
   </component>

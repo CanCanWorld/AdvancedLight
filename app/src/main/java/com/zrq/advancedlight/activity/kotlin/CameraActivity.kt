@@ -2,13 +2,19 @@ package com.zrq.advancedlight.activity.kotlin
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.arthenica.ffmpegkit.FFmpegKit
@@ -16,6 +22,7 @@ import com.arthenica.ffmpegkit.ReturnCode
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.zrq.advancedlight.R
 import com.zrq.advancedlight.adapter.MediaAdapter
 import com.zrq.advancedlight.databinding.ActivityCameraBinding
 import com.zrq.advancedlight.entity.Media
@@ -137,6 +144,44 @@ class CameraActivity : AppCompatActivity() {
                 it.delete()
             }
         }.start()
+
+        mBinding.apply {
+            tvNormal.setOnClickListener {
+                tvNormal.isSelected = true
+                tvError.isSelected = false
+                tvNormal.setTextColor(Color.WHITE)
+                tvError.setTextColor(resources.getColor(R.color.blue))
+                cardView.visibility = View.GONE
+            }
+            tvError.setOnClickListener {
+                tvError.isSelected = true
+                tvNormal.isSelected = false
+                tvError.setTextColor(Color.WHITE)
+                tvNormal.setTextColor(resources.getColor(R.color.blue))
+                cardView.visibility = View.VISIBLE
+            }
+            cardView.setOnClickListener {
+                Log.d(TAG, "requestFocus")
+                etDesc.requestFocus()
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(mBinding.etDesc, 0)
+            }
+        }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        when (ev?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                if (currentFocus != mBinding.cardView) {
+                    Log.d(TAG, "clearFocus")
+                    mBinding.etDesc.clearFocus()
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(mBinding.etDesc.windowToken, 0)
+                }
+            }
+            else -> {}
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun createImageFile(): File? {
